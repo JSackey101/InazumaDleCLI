@@ -29,3 +29,9 @@ class Player:
                 self.gender == other_player.gender,
                 self.position == other_player.position,
                 self.school_year == other_player.school_year]
+        
+class PlayerDatabase:
+    """ A class to represent a Database of Players. """
+    
+    def __init__(self, players: list["Player"]) -> None:
+        self.players = players
