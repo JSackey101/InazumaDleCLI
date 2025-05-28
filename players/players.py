@@ -62,9 +62,10 @@ class PlayerDatabase:
                                 row[3],
                                 row[4].split(','),
                                 row[5])
-                list_of_players.append(player)
+                if not any(player == added_player for added_player in list_of_players):
+                    list_of_players.append(player)
             return list_of_players
         
 
 test = PlayerDatabase(player_file='players.csv')
-print(test.players[0])
+print(test.players[0]==test.players[1])
