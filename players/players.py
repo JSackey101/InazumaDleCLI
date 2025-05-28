@@ -55,7 +55,13 @@ class PlayerDatabase:
             players_data = list(row for row in players_csv)[1:]
             list_of_players = []
             for row in players_data:
-                player = Player()
+                player = Player(row[0],
+                                row[1],
+                                row[2],
+                                row[3],
+                                row[4].split(','),
+                                row[5])
+                list_of_players.append(player)
             return list_of_players
         
 
