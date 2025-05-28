@@ -39,10 +39,11 @@ class PlayerDatabase:
     
     def __init__(self, players: list["Player"] | None = None,
                  player_file: str | None = None) -> None:
+        self.players = []
         if players:
-            self.players = players
+            self.players += players
         if player_file:
-            self.read_player_data(player_file)
+            self.players += self.read_player_data(player_file)
         
     @staticmethod
     def read_player_data(file_name: str) -> list[Player]:
@@ -66,3 +67,4 @@ class PlayerDatabase:
         
 
 test = PlayerDatabase(player_file='players.csv')
+print(test.players[0])
