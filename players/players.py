@@ -37,23 +37,26 @@ class PlayerDatabase:
     
     # Currently figuring out logic - do I want the database to be able to fill itself - so user doesn't NEED to input Players or not
     
-    def __init__(self, players: list["Player"]) -> None:
-        if players is not None:
+    def __init__(self, players: list["Player"] | None = None,
+                 player_file: str | None = None) -> None:
+        if players:
             self.players = players
+        if player_file:
+            self.read_player_data(player_file)
         
     @staticmethod
     def read_player_data(file_name: str) -> list[Player]:
         """ Reads the player data from the CSV file and 
             creates and returns a list of Player objects. """
-        ABS_PATH = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-        with open(os.path.join(ABS_PATH, file_name), "r",
+        abs_path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        with open(os.path.join(abs_path, file_name), "r",
                   newline="", encoding="utf-8") as players:
             players_csv = csv.reader(players)
-            players_data = list(row for row in players_csv)
-            header_info = players_data.pop(0)
+            players_data = list(row for row in players_csv)[1:]
             list_of_players = []
             for row in players_data:
-                print(row)
+                player = Player()
             return list_of_players
         
 
+test = PlayerDatabase(player_file='players.csv')
